@@ -1,21 +1,59 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Loan</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<p class="notice">
-  <%= notice %>
-</p>
-<p class="alert">
-  <%= alert %>
-</p>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-<%= yield %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+    <div class="fixed">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1>
+              <%= link_to 'Loan', root_path %>
+            </h1>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <% if user_signed_in? %>
+              <li><a href="#"><%= current_user.email %></a></li>
+              <li class="has-form">
+                <%= link_to 'Log out', 'users/sign_out', method: :delete, class: 'button alert' %>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <div class="column small-12">
+        <% if notice.present? %>
+          <div data-alert class="alert-box success radius">
+            <%= notice %>
+          </div>
+        <% end %>
+        <% if alert.present? %>
+          <div data-alert class="alert-box alert radius">
+            <%= alert %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>
