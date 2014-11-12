@@ -26,6 +26,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'foundation-rails'
+gem 'pg'
 
 group :test do
   gem 'cucumber-rails', :require => false
