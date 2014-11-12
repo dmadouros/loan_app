@@ -7,8 +7,6 @@
 loan
 
 ## Database creation
-
-### Create Development and Test Databases and App User
 ```
 $ psql
 > create database loaner_development;
@@ -22,7 +20,7 @@ $ psql
 > \q
 ```
 
-### Database Initialization
+## Database Initialization
 ```
 $ rake db:drop db:create db:migrate db:seed
 ```
