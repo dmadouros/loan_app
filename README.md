@@ -6,7 +6,7 @@
 ## RVM Gemset
 loan
 
-## Database creation
+## Database Creation
 ```
 $ psql
 > create database loaner_development;
@@ -24,5 +24,17 @@ $ psql
 ```
 $ rake db:drop db:create db:migrate db:seed
 ```
+
+## How to Setup the Environment
+```
+$ echo "RACK_ENV=development" >> .env
+$ echo "PORT=3000" >> .env
+```
+
+## How to Run the Application
+```
+$ foreman start
+```
+
 
 
