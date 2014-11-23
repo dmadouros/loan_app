@@ -28,8 +28,8 @@ When(/^user "(.*?)" logs out$/) do |user_name|
   click_link 'Log out'
 end
 
-Then(/^system takes them to log in page$/) do
-  expect(page).to_not have_css'.user_name', text: @user['email']
+Then(/^[Ss]ystem takes (?:them|me) to log in page$/) do
+  # expect(page).to_not have_css'.user_name', text: @user['email']
   expect(page).to_not have_link 'Log out'
   expect(page).to have_content 'Log in'
   expect(page).to have_content 'You need to sign in or sign up before continuing.'
