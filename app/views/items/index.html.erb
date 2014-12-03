@@ -1,24 +1,28 @@
 <div class="row">
-  <div class="small-12 columns">
-    <h1>My Items</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="small-12 columns">
-    <%= link_to 'Add Item', new_item_path %>
-  </div>
-</div>
-<div class="row">
-  <div class="small-12 columns">
-    <table>
-      <tr>
-        <th>Name</th>
-      </tr>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= item.name %></td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="small-6 small-centered columns end">
+    <div class="row">
+      <div class="small-12 columns">
+        <h1>My Items</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= link_to 'Add Item', new_item_path, {class: 'button tiny'} %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <table>
+          <tr>
+            <th>Name</th>
+          </tr>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

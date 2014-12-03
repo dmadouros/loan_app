@@ -1,31 +1,44 @@
 <div class="row">
-  <div class="small-12 columns">
-    <div id="error_explanation">
-      <% if @item.errors.any? %>
-        <ul>
-          <% @item.errors.full_messages.each do |error| %>
-            <%= content_tag :li, error %>
-          <% end %>
-        </ul>
-      <% end %>
+  <div class="small-6 small-centered columns end">
+    <div class="row">
+      <div class="small-12 columns end">
+        <h1>Add Item</h1>
+      </div>
     </div>
+    <% if @item.errors.any? %>
+      <div class="row">
+        <div class="small-12 columns end">
+          <div id="error_explanation">
+            <ul>
+              <% @item.errors.full_messages.each do |error| %>
+                <%= content_tag :li, error %>
+              <% end %>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= form_for @item do |f| %>
+      <div class="row">
+        <div class="small-12 columns end">
+          <fieldset>
+            <%= f.label :name %>
+            <%= f.text_field :name, {autofocus: 'autofocus'} %>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-2 columns end">
+          <%= f.submit 'Create', {class: 'button tiny default'} %>
+        </div>
+        <div class="small-10 columns">
+          <%= link_to 'Cancel', items_path, {class: 'button tiny secondary'} %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<%= form_for @item do |f| %>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :name %>
-    </div>
-    <div class="small-10 columns">
-      <%= f.text_field :name %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.submit 'Create', {class: 'button tiny'} %>
-    </div>
-  </div>
-<% end %>
 
 

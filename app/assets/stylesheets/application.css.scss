@@ -16,10 +16,10 @@
 
  */
 
- /*
-   For Devise
- */
- #error_explanation {
+/*
+  For Devise
+*/
+#error_explanation {
   h2 {
     display: none;
   }
@@ -40,4 +40,8 @@
     font-size: 0.8125rem;
     transition: opacity 300ms ease-out;
   }
- }
+}
+
+table {
+  width: 100%;
+}
