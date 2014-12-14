@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe ItemsController, type: :controller do
+
   before do
     @user = User.create!(email: 'test@example.com', password: 'password')
     sign_in @user
