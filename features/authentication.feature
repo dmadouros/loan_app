@@ -1,8 +1,7 @@
-Feature: Authentication - we need to keep our users data safe
+Feature: Protect my data
 
-  Scenario: Requires login to see items I own page
-    Given I have an account with the following details:
-      | email    | test_user@example.com |
-      | password | password |
-    When I bypass login and go to item list
-    Then System takes me to log in page
+  Scenario: Requires authentication to see items that I own
+    Given I have an account
+    And I am not logged in
+    When I try to look at items that I own
+    Then I should be asked for my authentication credentials

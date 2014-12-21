@@ -1,36 +1,38 @@
-Given(/^user:$/) do |user_table|
-  @user = user_table.hashes[0]
-  User.create(email: @user['email'], password: @user['password'])
+Given(/^I am logged in$/) do
+  User.create!(email: 'test_user@example.com', password: 'password') unless User.where(email: 'test_user@example.com').exists?
+
+  application.visit_dashboard
+  application.login_with_credentials(email: 'test_user@example.com', password: 'password')
 end
 
-When(/^user "(.*?)" logs in$/) do |user_name|
-  visit root_path
-  fill_in 'Email', with: @user['email']
-  fill_in 'Password', with: @user['password']
-  click_button 'Log in'
+Given(/^I have an account$/) do
+  email = 'test_user@example.com'
+  password = 'password'
+  User.create!(email: email, password: password)
 end
 
-Then(/^system takes them to landing page$/) do
-  expect(page).to have_css'.user_name', text: @user['email']
-  expect(page).to have_link 'Log out'
-  expect(page).to have_content 'Hey there'
-  expect(page).to have_content 'Signed in successfully.'
+Given(/^I am not logged in$/) do; end
+
+When(/^I logout$/) do
+  application.primary_navigation.log_out
 end
 
-Given(/^user "(.*?)" is logged in$/) do |user_name|
-  visit root_path
-  fill_in 'Email', with: @user['email']
-  fill_in 'Password', with: @user['password']
-  click_button 'Log in'
+When(/^I login$/) do
+  application.visit_dashboard
+  application.login_with_credentials(email: 'test_user@example.com', password: 'password')
 end
 
-When(/^user "(.*?)" logs out$/) do |user_name|
-  click_link 'Log out'
-end
-
-Then(/^[Ss]ystem takes (?:them|me) to log in page$/) do
-  # expect(page).to_not have_css'.user_name', text: @user['email']
-  expect(page).to_not have_link 'Log out'
+Then(/^I should be asked for my authentication credentials$/) do
+  expect(application.primary_navigation).to_not have_log_out_button
+  expect(application.primary_navigation.user_name).to be_blank
+  expect(application.login_page).to have_log_in_button
   expect(page).to have_content 'Log in'
-  expect(page).to have_content 'You need to sign in or sign up before continuing.'
+  expect(application.login_page.errors).to include 'You need to sign in or sign up before continuing.'
+end
+
+Then(/^I should see my dashboard$/) do
+  expect(application.primary_navigation.user_name).to eq 'test_user@example.com'
+  expect(application.primary_navigation).to have_log_out_button
+  expect(application.dashboard_page.notifications).to include 'Signed in successfully.'
+  expect(application.dashboard_page).to be_dashboard_page
 end
